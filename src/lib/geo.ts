@@ -1,0 +1,51 @@
+// Shared city -> coordinate lookup used when creating loads from screenshots,
+// manual entry, or Excel/CSV import. Additive helper; safe to import anywhere.
+
+export const CITY_COORDS: Record<string, { lat: number; lng: number }> = {
+  'Atlanta,GA': { lat: 33.749, lng: -84.388 },
+  'Dallas,TX': { lat: 32.777, lng: -96.797 },
+  'Chicago,IL': { lat: 41.878, lng: -87.63 },
+  'Memphis,TN': { lat: 35.15, lng: -90.049 },
+  'Los Angeles,CA': { lat: 34.052, lng: -118.244 },
+  'Phoenix,AZ': { lat: 33.449, lng: -112.074 },
+  'Houston,TX': { lat: 29.76, lng: -95.37 },
+  'Jacksonville,FL': { lat: 30.332, lng: -81.656 },
+  'Charlotte,NC': { lat: 35.227, lng: -80.843 },
+  'Nashville,TN': { lat: 36.163, lng: -86.781 },
+  'Indianapolis,IN': { lat: 39.768, lng: -86.158 },
+  'Columbus,OH': { lat: 39.961, lng: -82.999 },
+  'Denver,CO': { lat: 39.739, lng: -104.99 },
+  'Kansas City,MO': { lat: 39.1, lng: -94.579 },
+  'St. Louis,MO': { lat: 38.627, lng: -90.199 },
+  'Miami,FL': { lat: 25.762, lng: -80.192 },
+  'Savannah,GA': { lat: 32.081, lng: -81.091 },
+  'Laredo,TX': { lat: 27.506, lng: -99.507 },
+  'El Paso,TX': { lat: 31.762, lng: -106.445 },
+  'San Antonio,TX': { lat: 29.425, lng: -98.495 },
+  'Birmingham,AL': { lat: 33.521, lng: -86.802 },
+  'Louisville,KY': { lat: 38.253, lng: -85.759 },
+  'Fresno,CA': { lat: 36.738, lng: -119.785 },
+  'Sacramento,CA': { lat: 38.582, lng: -121.494 },
+  'San Francisco,CA': { lat: 37.775, lng: -122.419 },
+  'Seattle,WA': { lat: 47.606, lng: -122.332 },
+  'Portland,OR': { lat: 45.523, lng: -122.677 },
+  'Salt Lake City,UT': { lat: 40.761, lng: -111.891 },
+  'Albuquerque,NM': { lat: 35.084, lng: -106.651 },
+  'Oklahoma City,OK': { lat: 35.468, lng: -97.516 },
+  'Omaha,NE': { lat: 41.257, lng: -95.995 },
+  'Minneapolis,MN': { lat: 44.978, lng: -93.265 },
+  'Detroit,MI': { lat: 42.331, lng: -83.046 },
+  'Cleveland,OH': { lat: 41.5, lng: -81.694 },
+  'Pittsburgh,PA': { lat: 40.441, lng: -79.99 },
+  'Philadelphia,PA': { lat: 39.953, lng: -75.164 },
+  'New York,NY': { lat: 40.713, lng: -74.006 },
+  'Newark,NJ': { lat: 40.736, lng: -74.172 },
+  'Baltimore,MD': { lat: 39.29, lng: -76.612 },
+  'Richmond,VA': { lat: 37.541, lng: -77.434 },
+  'Raleigh,NC': { lat: 35.78, lng: -78.639 },
+}
+
+export function getCoords(city: string, state: string): { lat: number; lng: number } {
+  const key = `${city.trim()},${state.trim().toUpperCase()}`
+  return CITY_COORDS[key] || { lat: 39.8, lng: -98.6 } // US center fallback
+}
