@@ -1,7 +1,8 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Package, RefreshCw, Search, X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Package, PlusCircle, RefreshCw, Search, X } from 'lucide-react'
 import { insforge } from '@/lib/insforge-browser'
 import type { Load, SpotRate } from '@/lib/types'
 import { DataTable } from '@/components/data-table/data-table'
@@ -27,6 +28,7 @@ import {
 const EQUIPMENT_TYPES = ['All Equipment', 'Dry Van', 'Reefer', 'Flatbed', 'Step Deck', 'Power Only']
 
 export default function LoadBoardPage() {
+  const router = useRouter()
   const [loads, setLoads] = useState<Load[]>([])
   const [spotRates, setSpotRates] = useState<SpotRate[]>([])
   const [loading, setLoading] = useState(true)
@@ -119,10 +121,16 @@ export default function LoadBoardPage() {
             {rows.length} of {loads.length} loads
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={handleRefresh} disabled={refreshing}>
-          <RefreshCw className={refreshing ? 'animate-spin' : undefined} />
-          Refresh
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={refreshing}>
+            <RefreshCw className={refreshing ? 'animate-spin' : undefined} />
+            Refresh
+          </Button>
+          <Button size="sm" onClick={() => router.push('/loads/add')}>
+            <PlusCircle className="h-4 w-4" />
+            Add Load
+          </Button>
+        </div>
       </div>
 
       {/* Filters */}
